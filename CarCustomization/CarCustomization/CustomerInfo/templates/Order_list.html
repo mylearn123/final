@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  {% block content_header %}
+    <h2>Information</h2>
+    <!-- <p>
+    </p> -->
+  {% endblock %}
+
+  <table class="table mb-0">
+    <thead>
+      <tr>
+        <th>Cover</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Download</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for Order in info %}
+        <tr>
+          <td>
+            {% if Order.cover %}
+              <img src="{{ Order.cover.url }}" alt="{{ Order.title }}" style="width:100px;">
+            {% else %}
+              <span class="text-muted">No cover</span>
+            {% endif %}
+          </td>
+          <td>{{ Order.title }}</td>
+          <td>{{ Order.author }}</td>
+          <td>
+            <a href="{{ Order.pdf.url }}" class="btn btn-primary btn-sm" target="_blank">
+              Download PDF
+            </a>
+          </td>
+          <td>
+            <form method="post" action="{% url 'delete_Order' Order.pk %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

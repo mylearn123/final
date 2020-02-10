@@ -1,0 +1,18 @@
+{% extends 'index.html'%}
+{% block content %}
+  <h1>your Registration Number is </h1>
+{% if allPosts %}        
+   {% for k in allPosts %}
+   Customer Id:{{k.Postid}}<br>
+        Customer Name: {{k.name}}<br>
+        Address: {{k.address}}<br>
+        Car: {{k.title}}<br>
+        Time of date: {{k.date}}<br>
+     {% endfor %}
+{% else %}
+      <p>you are not get register....!!</p>
+  your search - <b>{{query}}</b> didnot match any documents
+        try diffetrent keywords
+{% endif %}
+
+{% endblock %}
